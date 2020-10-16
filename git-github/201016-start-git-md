@@ -1,7 +1,10 @@
 # How to start git with 'git clone'
 
-1.
-
+1. Create remote repository on github.com
+2. Click Code button and copy to paste button.
+3. $ git clone { github repo addr } on your terminal.
+4. Do you work.
+5. $ git add {filename} -> $ git commit -> $ git push origin main
 
 ##Special Features
 
