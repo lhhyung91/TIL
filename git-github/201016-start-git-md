@@ -1,0 +1,19 @@
+# How to start git with 'git clone'
+
+1.
+
+
+##Special Features
+
+### Conventional Commits
+
+[Reference] (https://www.conventionalcommits.org/en/v1.0.0/)
+
+- feat: features
+- docs: documentation
+- conf: configuration
+- fix: bug-fix
+- ci: continuous integration
+- test: test codes
+- hot-fix: hot-fix
+- refactor: refactoring
