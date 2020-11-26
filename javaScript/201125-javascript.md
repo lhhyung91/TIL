@@ -178,3 +178,156 @@ var person = {
 
 
 위 그림과 같이 여러개의 식별자 중 한 식별자가 객체의 값을 변경하게 되면 모든 식별자가 영향을 받는다.
+
+# 12. 함수
+
+일련의 과정을 문으로 구현하고 코드블록으로 감싸서 하나의 실행 단위로 정의
+
+```markdown
+// 함수 정의
+function add(x, y) {
+  return x + y;
+}
+
+// 함수 호출
+var result = add(2, 5);
+
+// 함수 add에 인수 2, 5를 전달하면서 호출하면 반환값 7을 반환한다.
+console.log(result); // 7
+```
+
+![Untitled](https://user-images.githubusercontent.com/72958778/100345129-379ea880-3025-11eb-938c-45ac677e7033.png)
+
+
+# 함수의 사용 이유
+
+- 유지보수 용이
+- 가독성 향상
+- 신뢰성을 높이는 효과
+
+![Untitled 1](https://user-images.githubusercontent.com/72958778/100345177-46855b00-3025-11eb-8165-027f9e2dec21.png)
+
+
+# 함수 리터럴
+
+```markdown
+var f = function add(x, y) {
+  return x + y;
+};
+```
+
+리터럴은 값을 생성하는 표기법이다
+
+- 함수 이름
+    - **함수 이름은 식별자**다. 따라서 식별자 네이밍 규칙을 준수해야 한다.
+    - 함수 이름은 함수 몸체 내에서만 참조할 수 있는 식별자다.
+    - 함수 이름은 생략할 수 있다. 이름이 있는 함수를 기명 함수(named function), 이름이 없는 함수를 무명/익명 함수(anonymous function)라 한다.
+- 매개변수 목록
+    - 0개 이상의 매개변수를 소괄호로 감싸고 쉼표로 구분한다.
+    - 각 매개변수에는 함수를 호출할 때 지정한 인수가 순서대로 할당된다. 즉, 매개변수 목록은 순서에 의미가 있다.
+    - 매개변수는 함수 몸체 내에서 변수와 동일하게 취급된다. 따라서 매개변수도 변수와 마찬가지로 식별자 네이밍 규칙을 준수해야 한다.
+- 함수 몸체
+    - 함수가 호출되었을 때 일괄적으로 실행될 문들을 하나의 실행 단위로 정의한 코드 블록이다.
+    - 함수 몸체는 함수 호출에 의해 실행된다.
+- 일반 객체는 호출할 수 없지만 함수는 호출할 수 있다.
+
+# 함수정의
+
+- 함수 선언문 (function declaration/function statement)
+- 함수 표현식 (function expression)
+- function 생성자 함수 (Function constructor)
+- 화살표 함수 (arrow function): ES6
+
+## 함수 선언문
+
+- 함수 선언문은 함수리터럴과 형태가 동일하나, 함수 선언문은 함수 이름을 생략할 수 없다.
+- 함수 선언문은 표현식이 아닌 문이다.
+- 함수리터럴은 이름 생략 가능하나 함수 선언문은 불가
+
+![Untitled 2](https://user-images.githubusercontent.com/72958778/100345220-569d3a80-3025-11eb-847d-03a605cf678e.png)
+
+
+```markdown
+(function bar() {
+  console.log('bar');
+});
+bar();
+```
+
+# 반환문
+
+```markdown
+	function {
+	return (x + y);
+}
+```
+
+return 키워드 뒤에 반환값으로 사용할 표현식을 명시적으로 지정하지 않으면 undefined가 반환된다.
+
+# 즉시 실행 함수
+
+```markdown
+(function foo (){
+	실행 코드
+}());
+```
+
+# 재귀함수
+
+```markdown
+function factorial(x) {
+  // 종료 조건
+  if (x < 0) return;
+  
+  // 기반 조건
+  if (x === 0) return 1;
+  
+  // 재귀
+  return x * factorial(x - 1);
+}
+
+factorial(3);
+// 6
+```
+
+# 중첩함수
+
+```markdown
+function outer() {
+  var x = 1;
+
+  // 중첩 함수
+  function inner() {
+    var y = 2;
+    // 외부 함수의 변수를 참조할 수 있다.
+    console.log(x + y); // 3
+  }
+
+  inner();
+}
+
+outer();
+```
+
+# 콜백함수
+
+```markdown
+// n만큼 어떤 일을 반복한다
+function repeat(n) {
+  // i를 출력한다.
+  for (var i = 0; i < n; i++) console.log(i);
+}
+
+repeat(5); // 0 1 2 3 4
+```
+
+- 콜백함수 - 함수의 매개변수를 통해 다른 함수로 전달되는 함수
+- 고차함수 - 매개변수를 통해 외부에서 콜백 함수를 전달 받은 함수
+
+                    - 고차함수는 콜백함수를 일부분으로 합성
+
+              - 필요에 따라서 콜백함수에 인수 전달 가능
+
+# 참조에 의한 전달과 외부상태의 변경
+
+# 함수선언문과 리터럴, 함수표현식 공부 예정..
