@@ -42,13 +42,15 @@
 
 # 16. 프로퍼티 어트리뷰트
 
-# 내부슬롯과 메서드
+## 1. 내부슬롯과 메서드
 
 Ecmascript 사양에 등장하는 [[...]] 이중 대괄호는 대부분 내부슬롯과 내부메서드이다
 
 내부슬롯과 내부메서드는 자바스크립트 엔진 내부 로직이므로 원칙적으로 자바스크립트는 내부슬롯과 내부메서드에 직접적으로 호출이나 접근 방법을 제공하지 않는다.
 
 일부에서는 간접적으로 제공.
+
+## 2. 프로퍼티 어트리뷰트와 프로퍼티 디스크립터 객체
 
 자바스크립트 엔진은 프로퍼티를 생성할 때 프로퍼티의 상태를 나타내는 프로퍼티 어트리뷰트를 기본값으로 자동 정의한다.
 
@@ -69,3 +71,50 @@ Ecmascript 사양에 등장하는 [[...]] 이중 대괄호는 대부분 내부�
 프로퍼티 어트리뷰트에 직접 접근할 수 없지만 Object.getOwnPropertyDescriptor 메서드를 사용하여 간접적으로 확인할 수는 있다.
 
 Object.getOwnPropertyDescriptor 메서드는 프로퍼티 어트리뷰트 정보를 제공하는 프로퍼티 디스크립터(PropertyDescriptor) 객체를 반환
+
+```markdown
+const person = {
+  name: 'Lee'
+};
+
+// 프로퍼티 어트리뷰트 정보를 제공하는 프로퍼티 디스크립터 객체를 반환한다.
+console.log(Object.getOwnPropertyDescriptor(person, 'name'));
+// {value: "Lee", writable: true, enumerable: true, configurable: true}
+```
+
+Object.getOwnPropertyDescriptor 메서드는 프로퍼티 어트리뷰트 정보를 제공하는 프로퍼티 디스크립터(PropertyDescriptor) 객체를 반환, 
+
+Object.getOwnPropertyDescriptor 메서드 호출 시
+
+- 첫번째 매개변수에는 객체의 참조를 전달
+- 두번째 매개변수에는 프로퍼티 키를 문자열로 전달
+- 존재하지 않는 프로퍼티나 상속받은 프로퍼티에 대한 프로퍼티 디스크립터를 요구하면 undefined가 반환
+
+## 3. 데이터 프로퍼티와 접근자 프로퍼티
+
+- 데이터 프로퍼티(data property)키와 값으로 구성된 일반적인 프로퍼티다. 지금까지 살펴본 모든 프로퍼티는 데이터 프로퍼티다.
+- 접근자 프로퍼티(accessor property)자체적으로는 값을 갖지 않고 다른 데이터 프로퍼티의 값을 읽거나 저장할 때 호출되는 접근자 함수(accessor function)로 구성된 프로퍼티다.
+
+### 3.1. 데이터 프로퍼티
+
+[제목 없음](https://www.notion.so/fe7a6c45cc14409c97c5bef1f5fa7966)
+
+프로퍼티가 생성될 때 [[Value]]의 값은 프로퍼티 값으로 초기화되며 [[Writable]], [[Enumerable]], [[Configurable]]의 값은 true로 초기화된다. 이것은 프로퍼티를 동적 추가해도 마찬가지다.
+
+### 3.2. 접근자 프로퍼티
+
+[제목 없음](https://www.notion.so/55b76a0866374401ae70b11f1fa4fa3c)
+
+## 4. 프로퍼티 정의
+
+Object.defineProperty 메서드를 사용하면 프로퍼티의 어트리뷰트를 정의할 수 있다. 인수로는 객체의 참조와 데이터 프로퍼티의 키인 문자열, 프로퍼티 디스크립터 객체를 전달한다.
+
+Object.defineProperty 메서드로 프로퍼티를 정의할 때 프로퍼티 디스크립터 객체의 프로퍼티를 일부 생략할 수 있다. 프로퍼티 디스크립터 객체에서 생략된 어트리뷰트는 다음과 같이 기본값이 적용
+
+[제목 없음](https://www.notion.so/a26210e8d5874c6fafab675d6579b4e5)
+
+### 5. 객체 변경 방지
+
+[제목 없음](https://www.notion.so/d28545d153a1438f8f0b8b9c2adf4fa4)
+
+Object.freeze 메서드로 동결하여도 중첩객체까지는 동결 불가능
