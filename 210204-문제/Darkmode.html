@@ -107,26 +107,25 @@
   <script>
     const $toggleBtn = document.querySelector('.toggle-button');
     const $body = document.querySelector('body');
-    localStorage.setItem('theme', 'light');
-    console.log(localStorage.getItem('theme'))
-    // 상태 저장 실패..
-    // if (!localStorage.getItem('theme') === 'dark') {
-    //   $body.classList.remove("dark");
-    // } else {
-    //   $body.classList.add("dark");
-    // }
+
+
+    // 상태 저장 성공, 깜빡임 실패..
+    if (localStorage.getItem('theme') === 'dark') {
+      $body.classList.add('dark');
+    } else {
+      $body.classList.remove('dark');
+      $body.classList.add('light');
+
+    }
 
 
     $toggleBtn.onclick = e => {
-      if (!$body.classList.contains("dark")) {
-        $body.classList.add("dark");
+      if (!$body.classList.contains('dark')) {
+        $body.classList.add('dark');
         localStorage.setItem('theme', 'dark');
-        console.log(localStorage.getItem('theme'))
-
       } else {
-        $body.classList.remove("dark");
+        $body.classList.remove('dark');
         localStorage.setItem('theme', 'light');
-        console.log(localStorage.getItem('theme'))
       }
     };
   </script>
