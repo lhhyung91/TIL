@@ -11,7 +11,9 @@ function solution(n) {
       answer = answer + "박";
     }
   }
+  console.log(answer);
   return answer;
 }
 
-solution();
+solution(3);
+solution(4);
