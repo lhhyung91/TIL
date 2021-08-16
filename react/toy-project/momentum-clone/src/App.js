@@ -1,8 +1,9 @@
 import BackGroundImage from "./components/BackGroundImage/BackGroundImage";
 import Time from "./components/Time/Time";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import TodosContainer from "./containers/TodosContainer";
 import TodoListContainer from "./containers/TodoListContainer";
+import { palette } from "./styles/color";
 
 const StyledAppWrapper = styled.div`
   width: 100vw;
@@ -12,12 +13,14 @@ const StyledAppWrapper = styled.div`
 
 function App() {
   return (
-    <StyledAppWrapper>
-      <BackGroundImage />
-      <TodosContainer />
-      <Time />
-      <TodoListContainer />
-    </StyledAppWrapper>
+    <ThemeProvider theme={palette}>
+      <StyledAppWrapper>
+        <BackGroundImage />
+        <TodosContainer />
+        <Time />
+        <TodoListContainer />
+      </StyledAppWrapper>
+    </ThemeProvider>
   );
 }
 
