@@ -16,7 +16,7 @@ export default function TodoList({ todos, onToggleTodo }) {
   return (
     <StyledUl>
       {todos.map((todo) => (
-        <StyledTodoList key={todo.id} onClick={onToggleTodo}>
+        <StyledTodoList key={todo.id} onClick={() => onToggleTodo(todo.id)}>
           {todo.text}
         </StyledTodoList>
       ))}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Todos from "../components/Todos/Todos";
-import { addTodo, toggleTodo } from "../modules/todos";
+import { addTodo } from "../modules/todos";
 
 export default function TodosContainer() {
   const [text, setText] = useState("");
@@ -19,11 +19,11 @@ export default function TodosContainer() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (text === "") return;
     onCreateTodo(text);
     setText("");
   };
 
-  // console.log(todos);
   return (
     <Todos todos={todos} onSubmit={onSubmit} onChange={onChange} value={text} />
   );
