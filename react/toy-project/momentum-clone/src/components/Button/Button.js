@@ -1,6 +1,5 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { ImCheckboxUnchecked } from "react-icons/im";
 import { palette } from "../../styles/color";
 
 const StyledButton = styled.button`
@@ -17,9 +16,15 @@ const StyledButton = styled.button`
   padding-left: 1rem;
   padding-right: 1rem;
 
+  :hover {
+    background-color: ${palette.gray};
+  }
+
   :active {
+    background-color: ${palette.darkgray};
     color: ${palette.pink};
   }
+
   /* 기타 */
 `;
 
