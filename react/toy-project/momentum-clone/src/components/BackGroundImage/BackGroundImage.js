@@ -10,10 +10,12 @@ const StyleImage = styled.img`
 `;
 
 export default function BackGroundImage() {
+  const { REACT_APP_IMAGE_API_KEY } = process.env;
   const [image, setImgae] = useState(null);
 
   const apiAddress = "https://api.unsplash.com";
-  const accessKey = "GX6cJXQnXXo3jOzqeDvkUaD24XuuF6XBbadQ3siLF-0";
+  // const accessKey = "GX6cJXQnXXo3jOzqeDvkUaD24XuuF6XBbadQ3siLF-0";
+  const accessKey = REACT_APP_IMAGE_API_KEY;
 
   const getData = async () => {
     const res = await axios.get(
