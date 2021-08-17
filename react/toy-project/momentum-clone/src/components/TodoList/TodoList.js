@@ -1,15 +1,31 @@
 import React from "react";
 import styled from "styled-components";
+import { palette } from "../../styles/color";
 
 const StyledUl = styled.ul`
-  background-color: red;
   position: absolute;
   bottom: 0;
   right: 0;
+  /* border: 5px solid ${palette.black}; */
+  height: 100px;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    background-color: ${palette.white};
+    border-left: 5px solid ${palette.black};
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: ${palette.blue};
+    /* border-radius: 45%; */
+  }
 `;
 
 const StyledTodoList = styled.li`
-  background-color: yellowgreen;
+  background-color: ${palette.white};
+  width: 150px;
+  padding-left: 5px;
+  color: ${palette.blue};
+  font-size: 1.3rem;
+  /* background-color: yellowgreen; */
 `;
 
 export default function TodoList({ todos, onToggleTodo }) {
