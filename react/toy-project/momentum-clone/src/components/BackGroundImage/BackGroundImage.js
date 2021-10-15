@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useEffect } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
+import styled from 'styled-components';
 
 const StyleImage = styled.img`
   width: 100vw;
@@ -13,7 +13,7 @@ export default function BackGroundImage() {
   const { REACT_APP_IMAGE_API_KEY } = process.env;
   const [image, setImgae] = useState(null);
 
-  const apiAddress = "https://api.unsplash.com";
+  const apiAddress = 'https://api.unsplash.com';
   const accessKey = REACT_APP_IMAGE_API_KEY;
 
   const getData = async () => {
@@ -27,5 +27,5 @@ export default function BackGroundImage() {
     getData();
   }, []);
 
-  return <StyleImage src={image} alt="image" style={{ vw: 100 }}></StyleImage>;
+  return <StyleImage src={image} alt='image' style={{ vw: 100 }}></StyleImage>;
 }
