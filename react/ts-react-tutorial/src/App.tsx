@@ -2,6 +2,7 @@ import React from 'react';
 import Counter from './Counter';
 import MyForm from './MyForm';
 import ReducerSample from './ReducerSample';
+import { SampleProvider } from './SampleContext';
 
 function App() {
   const onSubmit = (form: { name: string; description: string }) => {
@@ -9,9 +10,11 @@ function App() {
   };
   return (
     <div>
-      <MyForm onSubmit={onSubmit} />
-      <Counter />
-      <ReducerSample />
+      {/* <MyForm onSubmit={onSubmit} /> */}
+      {/* <Counter /> */}
+      <SampleProvider>
+        <ReducerSample />
+      </SampleProvider>
     </div>
   );
 }
