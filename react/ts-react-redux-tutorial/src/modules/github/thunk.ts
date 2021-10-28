@@ -9,7 +9,8 @@ export function getUserProfileThunk(username: string) {
     try {
       const userProfile = await getUserProfile(username);
       dispatch(success(userProfile));
-    } catch (e) {
+    } catch (e: any) {
+      // e의 타입을 뭐로 해야 될 지 모르겠음
       dispatch(failure(e));
     }
   };
