@@ -1,4 +1,4 @@
-import { delay, put, take, takeEvery, takeLatest } from 'redux-saga/effects';
+import { delay, put, takeEvery, takeLatest } from 'redux-saga/effects';
 
 const INCREASE = 'INCREASE';
 const DECREASE = 'DECREASE';
