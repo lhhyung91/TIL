@@ -1,29 +1,11 @@
-const sleep = (n) => new Promise((resolve) => setTimeout(resolve, n));
-
-const posts = [
-  {
-    id: 1,
-    title: "redux",
-    body: "어휴..",
-  },
-  {
-    id: 2,
-    title: "redux-thunk",
-    body: "아니 이건 또..",
-  },
-  {
-    id: 3,
-    title: "redux-saga",
-    body: "아니 아니 이건 왜 또..",
-  },
-];
+import axios from 'axios';
 
 export const getPosts = async () => {
-  await sleep(500);
-  return posts;
+  const response = await axios.get('/posts');
+  return response.data;
 };
 
-export const getPostById = async (id) => {
-  await sleep(500);
-  return posts.find((post) => post.id === id);
+export const getPostById = async id => {
+  const response = await axios.get(`/posts/${id}`);
+  return response.data;
 };
