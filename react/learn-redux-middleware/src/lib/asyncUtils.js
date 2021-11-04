@@ -1,26 +1,69 @@
-// thunk 생성 함수
-// action.type 프로미스를 만들어주는 함수 promiseCreator를 매개변수로 받는다.
-export const createPromiseThunk = (type, promiseCreator) => {
-  const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+import { call, put } from 'redux-saga/effects';
 
-  // thunk 생성 함수
-  return param => async dispatch => {
-    dispatch({ type, param });
+export const createPromiseSaga = (type, promiseCreator) => {
+  const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+  return function* saga(action) {
     try {
-      const payload = await promiseCreator(param);
-      dispatch({
+      const result = yield call(promiseCreator, action.payload);
+      yield put({
         type: SUCCESS,
-        payload,
+        payload: result,
       });
     } catch (e) {
-      dispatch({
+      yield put({
         type: ERROR,
-        payload: e,
         error: true,
+        payload: e,
       });
     }
   };
 };
+
+export const createPromiseSagaById = (type, promiseCreator) => {
+  const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+  return function* saga(action) {
+    const id = action.meta;
+    try {
+      const result = yield call(promiseCreator, action.payload);
+      yield put({
+        type: SUCCESS,
+        payload: result,
+        meta: id,
+      });
+    } catch (e) {
+      yield put({
+        type: ERROR,
+        error: true,
+        payload: e,
+        meta: id,
+      });
+    }
+  };
+};
+
+// thunk 생성 함수
+// action.type 프로미스를 만들어주는 함수 promiseCreator를 매개변수로 받는다.
+// export const createPromiseThunk = (type, promiseCreator) => {
+//   const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+
+//   // thunk 생성 함수
+//   return param => async dispatch => {
+//     dispatch({ type, param });
+//     try {
+//       const payload = await promiseCreator(param);
+//       dispatch({
+//         type: SUCCESS,
+//         payload,
+//       });
+//     } catch (e) {
+//       dispatch({
+//         type: ERROR,
+//         payload: e,
+//         error: true,
+//       });
+//     }
+//   };
+// };
 
 export const reducerUtils = {
   initial: (data = null) => ({
@@ -45,36 +88,36 @@ export const reducerUtils = {
   }),
 };
 
-const defaultIdSelector = param => param;
+// const defaultIdSelector = param => param;
 
-export const createPromiseThunkById = (
-  type,
-  promiseCreator,
-  idSelector = defaultIdSelector
-) => {
-  const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+// export const createPromiseThunkById = (
+//   type,
+//   promiseCreator,
+//   idSelector = defaultIdSelector
+// ) => {
+//   const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
 
-  // thunk 생성 함수
-  return param => async dispatch => {
-    const id = idSelector(param);
-    dispatch({ type, meta: id });
-    try {
-      const payload = await promiseCreator(param);
-      dispatch({
-        type: SUCCESS,
-        payload,
-        meta: id,
-      });
-    } catch (e) {
-      dispatch({
-        type: ERROR,
-        payload: e,
-        error: true,
-        meta: id,
-      });
-    }
-  };
-};
+//   // thunk 생성 함수
+//   return param => async dispatch => {
+//     const id = idSelector(param);
+//     dispatch({ type, meta: id });
+//     try {
+//       const payload = await promiseCreator(param);
+//       dispatch({
+//         type: SUCCESS,
+//         payload,
+//         meta: id,
+//       });
+//     } catch (e) {
+//       dispatch({
+//         type: ERROR,
+//         payload: e,
+//         error: true,
+//         meta: id,
+//       });
+//     }
+//   };
+// };
 
 export const handleAsyncActions = (type, key, keepData) => {
   const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
