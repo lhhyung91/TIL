@@ -1,43 +1,28 @@
-import { createReducer } from 'typesafe-actions';
+import { createReducer } from "typesafe-actions";
+import { asyncState } from "../../lib/reducerUtils";
 import {
   GET_USER_PROFILE,
   GET_USER_PROFILE_SUCCESS,
   GET_USER_PROFILE_ERROR,
-} from './actions';
-import { GiehubAction, GiehubState } from './types';
+} from "./actions";
+import { GithubAction, GithubState } from "./types";
 
-const initialState: GiehubState = {
-  userProfile: {
-    loading: false,
-    data: null,
-    error: null,
-  },
+const initialState: GithubState = {
+  userProfile: asyncState.initial(),
 };
 
-const github = createReducer<GiehubState, GiehubAction>(initialState, {
-  [GET_USER_PROFILE]: (state, action) => ({
+const github = createReducer<GithubState, GithubAction>(initialState, {
+  [GET_USER_PROFILE]: state => ({
     ...state,
-    userProfile: {
-      loading: true,
-      data: null,
-      error: null,
-    },
+    userProfile: asyncState.load(),
   }),
   [GET_USER_PROFILE_SUCCESS]: (state, action) => ({
     ...state,
-    userProfile: {
-      loading: false,
-      data: action.payload,
-      error: null,
-    },
+    userProfile: asyncState.success(action.payload),
   }),
   [GET_USER_PROFILE_ERROR]: (state, action) => ({
     ...state,
-    userProfile: {
-      loading: false,
-      data: null,
-      error: action.payload,
-    },
+    userProfile: asyncState.error(action.payload),
   }),
 });
 
