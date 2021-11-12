@@ -1,21 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import rootReduer from './modules';
-import Thunk from 'redux-thunk';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import rootReduer, { rootSaga } from "./modules";
+// import Thunk from "redux-thunk";
+import createSagaMiddleware from "redux-saga";
 
-const store = createStore(rootReduer, applyMiddleware(Thunk));
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(rootReduer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(rootSaga);
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
