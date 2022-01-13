@@ -9,29 +9,6 @@ export const getTodos = createAsyncThunk("todos", async () => {
   return response.data;
 });
 
-// export const increaseAsync = () => dispatch => {
-//     setTimeout(() => dispatch(increase()), 1000);
-//   };
-
-//  param => async dispatch => {
-//         dispatch({ type, param });
-//         try {
-//           const payload = await promiseCreator(param);
-//           dispatch({
-//             type: SUCCESS,
-//             payload,
-//           });
-//         } catch (e) {
-//           dispatch({
-//             type: ERROR,
-//             payload: e,
-//             error: true,
-//           });
-//         }
-//       };
-//     };
-
-// let id = 1;
 export const todosSlice = createSlice({
   name: "todos",
   initialState: {
